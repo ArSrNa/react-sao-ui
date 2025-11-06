@@ -1,7 +1,7 @@
 import style from './index.module.scss';
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ReactNode, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import { cancel, ok } from './icons';
 
 gsap.registerPlugin(useGSAP);
@@ -22,6 +22,9 @@ export function Dialog(props: {
 }) {
     const { show, title, body, onOk, onCancel, footer, height = 150 } = props;
     const dialog = useRef(null);
+    useEffect(() => {
+        dialog.current.style.display = 'none'
+    }, []);
     useGSAP(async () => {
         const tl = gsap.timeline({
             yoyo: true,
